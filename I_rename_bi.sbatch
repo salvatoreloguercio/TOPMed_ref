@@ -49,7 +49,7 @@ for i in {1..22}; do
 
     infile=$(basename $input .vcf.gz | sed -e "s/chr22/chr${i}/g" ).rename.vcf.gz
     outfile=$(echo ${infile} | sed -e 's/\.rename\.vcf\.gz/\.rename\.bi\.vcf\.gz/g')
-    echo -e '#!/bin/bash -l' > bi_${cg}.sh
+
     echo -e "bcftools view chr${i}/$infile -M 2 -m 2 -v snps -Oz -o chr${i}/$outfile; tabix -f -p vcf chr${i}/$outfile" >> bi_${cg}.sh
 done
 
@@ -67,14 +67,14 @@ for i in {1..22}; do
 
     infile=$(basename $input .vcf.gz | sed -e "s/chr22/chr${i}/g" ).rename.bi.vcf.gz
 
-    echo -e "nvar=\$(zcat chr${i}/$infile | grep -v \"#\" | wc -l); echo $i \$nvar > final_lifted_count_$i.txt"; done >> run_final_check_${cg}.sh
+    echo -e "nvar=\$(zcat chr${i}/$infile | grep -v \"#\" | wc -l); echo $i \$nvar >> bi_filt_count_${cg}.txt" >> run_final_check_${cg}.sh
 done
 
 parallel -j 16 < run_final_check_${cg}.sh
 
 #rm run_final_check_${cg}.sh
 
-cat final_lifted_count_{1..22}.txt
+#cat final_lifted_count_{1..22}.txt
 
 end=`date +%s`
 
