@@ -21,12 +21,13 @@ echo "Renaming chrs..."
 
 chr_names=/mnt/stsi/stsi5/raqueld/picard_utils/chr_names.txt
 
+name=$(basename $input .vcf.gz)
+cg=$(echo $name | cut -d "_" -f 1-2)
+
 echo -e '#!/bin/bash -l' > annotate_${cg}.sh
 
 for i in {1..22}; do
-
-  name=$(basename $input .vcf.gz)
-  cg=$(echo $name | cut -d "_" -f 1-2)
+  
   infile=$(echo $input | sed -e "s/chr22/chr${i}/g" )
   outfile=$(basename $infile | sed -e "s/\.vcf\.gz/\.rename\.vcf\.gz/g")
 
