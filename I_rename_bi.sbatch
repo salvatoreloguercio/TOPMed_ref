@@ -22,7 +22,7 @@ echo "Renaming chrs..."
 chr_names=/mnt/stsi/stsi5/raqueld/picard_utils/chr_names.txt
 
 name=$(basename $input .vcf.gz)
-cg=$(echo $name | cut -d "_" -f 1-2)
+cg=$(echo $name | sed -e "s/_TOPMed_WGS_freeze\.8\.chr22\.hg38//g")  #cut -d "_" -f 1-2)
 
 echo -e '#!/bin/bash -l' > annotate_${cg}.sh
 
