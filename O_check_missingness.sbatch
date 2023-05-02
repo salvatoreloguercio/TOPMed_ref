@@ -7,6 +7,7 @@
 #SBATCH -J chr20_plink2_mis
 #SBATCH -o chr20_plink2_mis.%J
 
+module load plink/2.00a3
 
 while read path_line; do
  
