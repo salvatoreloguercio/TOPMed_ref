@@ -10,4 +10,4 @@ smiss_summaries<-do.call("rbind",lapply(filelist,function(x) summary(read.delim(
 
 rownames(smiss_summaries)<-gsub(".smiss","",filelist)
 
-write.table(smiss_summaries,sep="\t",row.names=T,sep="",quote=F,file="O_missingness_summaries.tsv")
+write.table(smiss_summaries,sep="\t",row.names=T,quote=F,file="O_missingness_summaries.tsv")
