@@ -30,7 +30,7 @@ while read path_line; do
 done < rename_list.txt
 
 # repeat for rename_bi
-ls *rename_bi.vcf.gz > rename_bi_list.txt
+ls *rename.bi.vcf.gz > rename_bi_list.txt
 
 while read path_line; do
  
